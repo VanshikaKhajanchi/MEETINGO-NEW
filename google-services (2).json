@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "596722915992",
+    "firebase_url": "https://vanshika-ea13a.firebaseio.com",
+    "project_id": "vanshika-ea13a",
+    "storage_bucket": "vanshika-ea13a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596722915992:android:a4a5562c427a5bbd",
+        "android_client_info": {
+          "package_name": "com.example.vanshika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596722915992-ih8pp7sta2gtg335mc7oeg7l22ke856b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vanshika",
+            "certificate_hash": "68c710ed8e3535d68e005be7bb2ffd9e12844d83"
+          }
+        },
+        {
+          "client_id": "596722915992-dbv2g9bdst68nfk3879g9ng487sslfl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz407GcHBfbtPO4UrZy6QqVsEpAAkTLiA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596722915992-dbv2g9bdst68nfk3879g9ng487sslfl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
