@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +28,7 @@ public class Register extends AppCompatActivity
     //defining objects and variables;
     private EditText editTextEmail,editTextPassword,phone,name;
     private Button btn_signup;
+    private String Name,Email,Phone,Userid;
 
 
 
@@ -43,12 +45,15 @@ public class Register extends AppCompatActivity
 
 
         //initializing views
-        editTextEmail = (EditText) findViewById(R.id.singup_emailid);
-        editTextPassword = (EditText) findViewById(R.id.signup_passwrod);
+        editTextEmail =findViewById(R.id.singup_emailid);
+        editTextPassword =findViewById(R.id.signup_passwrod);
         phone=findViewById(R.id.signup_phone);
         name=findViewById(R.id.signup_name);
 
         btn_signup = (Button) findViewById(R.id.SignUp_button);
+
+
+
 
         /*progressDialog = new ProgressDialog(this);*/
 
@@ -57,12 +62,27 @@ public class Register extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if(validform()==true)
-                {registerUser();}
+                {
+                    registerUser();
+                }
 
             }
         });
 
     }
+
+    private void adduserdb(FirebaseUser user) {
+        /*converting to String*/
+        Name=name.getText().toString().trim();
+        Email=editTextEmail.getText().toString().trim();
+        Phone=phone.getText().toString().trim();
+
+        Userid=user.getUid();
+        User us=new User(Name,Email,Userid,Phone);
+        mDatabase.child("users").child(Userid).setValue(us);
+    }
+
+
 
 
     private void registerUser(){
@@ -80,6 +100,7 @@ public class Register extends AppCompatActivity
 
                              //checking if success
                              if (task.isSuccessful()) {
+                                 adduserdb(task.getResult().getUser());
                                  //display some message here
                                  Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_LONG).show();
 
