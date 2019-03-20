@@ -1,5 +1,6 @@
 package com.example.MEETINGO;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +13,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity
+{
 
 
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference mDatabase;
 
     //defining objects and variables;
     private EditText editTextEmail,editTextPassword,phone,name;
@@ -33,11 +38,15 @@ public class Register extends AppCompatActivity {
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.singup_emailid);
         editTextPassword = (EditText) findViewById(R.id.signup_passwrod);
+        phone=findViewById(R.id.signup_phone);
+        name=findViewById(R.id.signup_name);
 
         btn_signup = (Button) findViewById(R.id.SignUp_button);
 
@@ -47,7 +56,8 @@ public class Register extends AppCompatActivity {
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
+                if(validform()==true)
+                {registerUser();}
 
             }
         });
@@ -62,24 +72,63 @@ public class Register extends AppCompatActivity {
         String password  = editTextPassword.getText().toString().trim();
 
 
-        //creating a new user
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+             //creating a new user
+             firebaseAuth.createUserWithEmailAndPassword(email, password)
+                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                         @Override
+                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        //checking if success
-                        if(task.isSuccessful()){
-                            //display some message here
-                            Toast.makeText(Register.this,"Successfully registered", Toast.LENGTH_LONG).show();
-                        }else{
-                            //display some message here
-                            Toast.makeText(Register.this,"Registration Error",Toast.LENGTH_LONG).show();
-                        }
+                             //checking if success
+                             if (task.isSuccessful()) {
+                                 //display some message here
+                                 Toast.makeText(Register.this, "Successfully registered", Toast.LENGTH_LONG).show();
 
-                    }
-                });
+                                 finish();
+                                 //opening profile activity
+                                 startActivity(new Intent(getApplicationContext(), Home.class));
+                             } else {
+                                 //display some message here
+                                 editTextEmail.setError("Enter valid Email");
+                                 Toast.makeText(Register.this, "Registration Error", Toast.LENGTH_LONG).show();
+                             }
 
+                         }
+                     });
+
+
+
+    }
+
+    private boolean validform()
+    {/*
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]";*/
+
+        if(name.getText().toString().trim().length()==0)
+        {
+            name.setError("Enter Name");
+        }
+        else  if(phone.getText().toString().trim().length()==0)
+        {
+            phone.setError("Enter Phone Number");
+        }
+        else  if(phone.getText().toString().trim().length()<=10)
+        {
+            phone.setError("Enter Valid Phone Number");
+        }
+        /*else  if(editTextEmail.getText().toString()== emailPattern)
+        {
+            editTextEmail.setError("Enter valid Email");
+        }*/
+        else if(editTextPassword.getText().toString().trim().length()==0)
+        {
+            editTextPassword.setError("Enter Password");
+        }
+        else if(editTextPassword.getText().toString().trim().length()<=8)
+        {
+            editTextPassword.setError("Password should be greater than 8 digits");
+        }
+        else{return true;}
+        return false;
     }
 
 
