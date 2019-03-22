@@ -132,7 +132,7 @@ public class Register extends AppCompatActivity
         {
             phone.setError("Enter Phone Number");
         }
-        else  if(phone.getText().toString().trim().length()<=10)
+        else  if(phone.getText().toString().trim().length() == 10)
         {
             phone.setError("Enter Valid Phone Number");
         }
