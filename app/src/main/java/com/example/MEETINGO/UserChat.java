@@ -1,51 +1,29 @@
 package com.example.MEETINGO;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class Homepage extends AppCompatActivity
-    implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    //firebase auth object
-    private FirebaseAuth firebaseAuth;
-
+public class UserChat extends AppCompatActivity
+        implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
-        //getting firebase auth object
-        firebaseAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_user_chat);
 
 
-        //loading the default fragment
-//        loadFragment(new AccountFragment());
 
+        //including bottomnav bar
         BottomNavigationView navigation =findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-
     }
 
 
-//
-//    private boolean loadActivity(){
-//
-//        if (firebaseAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(getApplicationContext(), UserChat.class));
-//            return true;
-//        }
-//        return false;
-//    }
-
-
+    //bottom Navigation method
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -68,4 +46,5 @@ public class Homepage extends AppCompatActivity
         return false;
 
     }
+
 }

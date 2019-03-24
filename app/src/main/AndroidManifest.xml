@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Webinar"></activity>
+        <activity android:name=".UserChat" />
+        <activity android:name=".UserAccount" />
         <activity
             android:name=".Homepage"
-            android:label="@string/title_activity_homepage"></activity>
+            android:label="@string/title_activity_homepage" />
         <activity android:name=".Home" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
