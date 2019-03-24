@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home"></activity>
+        <activity
+            android:name=".Homepage"
+            android:label="@string/title_activity_homepage"></activity>
+        <activity android:name=".Home" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".FirstScreen" />

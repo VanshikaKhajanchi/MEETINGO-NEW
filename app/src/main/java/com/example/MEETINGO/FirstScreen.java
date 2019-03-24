@@ -34,7 +34,7 @@ public class FirstScreen extends AppCompatActivity {
             //close this activity
             finish();
             //opening profile activity
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), Homepage.class));
             Toast.makeText(FirstScreen.this,"Current USer DETECTED", Toast.LENGTH_LONG).show();
         }
 

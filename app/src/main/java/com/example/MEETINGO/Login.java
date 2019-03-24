@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
             //close this activity
             finish();
             //opening profile activity
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), Homepage.class));
             Toast.makeText(Login.this,"Current USer DETECTED", Toast.LENGTH_LONG).show();
         }
 
@@ -90,7 +90,7 @@ public class Login extends AppCompatActivity {
                         if(task.isSuccessful()){
                             //start the profile activity
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Home.class));
+                            startActivity(new Intent(getApplicationContext(), Homepage.class));
                         }
                         else
                         {
