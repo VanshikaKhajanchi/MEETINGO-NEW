@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-
+//import com.pubnub.api.Callback;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity
@@ -34,16 +33,6 @@ public class Homepage extends AppCompatActivity
 
     }
 
-
-//
-//    private boolean loadActivity(){
-//
-//        if (firebaseAuth.getCurrentUser() != null) {
-//            startActivity(new Intent(getApplicationContext(), UserChat.class));
-//            return true;
-//        }
-//        return false;
-//    }
 
 
     @Override

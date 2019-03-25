@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,24 +9,31 @@
 
 
     //including bottomnav bar
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_margin="4dp"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navigation" />
+        android:layout_alignParentBottom="true">
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_margin="4dp"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/botom_nav_colors"
+            app:itemTextColor="@drawable/botom_nav_colors"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/navigation" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="311dp"
-        android:layout_marginBottom="401dp"
+        android:layout_centerInParent="true"
         android:text="Chat Activity"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -33,4 +41,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

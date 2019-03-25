@@ -121,6 +121,11 @@
 
     //including bottomnav bar
 
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -128,10 +133,15 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:layout_margin="4dp"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/white"
+        app:itemIconTint="@drawable/botom_nav_colors"
+        app:itemTextColor="@drawable/botom_nav_colors"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
 </RelativeLayout>
 
 
