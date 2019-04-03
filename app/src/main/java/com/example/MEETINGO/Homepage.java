@@ -41,15 +41,20 @@ public class Homepage extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.navigation_home:
-                startActivity(new Intent(getApplicationContext(), UserChat.class));
+                startActivity(new Intent(getApplicationContext(), CUsers.class));
                 break;
 
             case R.id.navigation_webinar:
-                startActivity(new Intent(getApplicationContext(), Webinar.class));
+                startActivity(new Intent(getApplicationContext(), MyActivity.class));
                 break;
 
             case R.id.navigation_account:
                 startActivity(new Intent(getApplicationContext(), UserAccount.class));
+                break;
+
+            case R.id.navigation_Status:
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);
                 break;
 
         }

@@ -6,6 +6,10 @@ public class User {
     public String Phone;
     public String Userid;
 
+    static String username = "";
+    static String password = "";
+    static String chatWith = "";
+
    public User(){//default constructor
          }
 

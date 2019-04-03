@@ -106,7 +106,7 @@ public class Register extends AppCompatActivity
 
                                  finish();
                                  //opening profile activity
-                                 startActivity(new Intent(getApplicationContext(), Homepage.class));
+                                 startActivity(new Intent(getApplicationContext(), UserChat.class));
                              } else {
                                  //display some message here
                                  editTextEmail.setError("Enter valid Email");
