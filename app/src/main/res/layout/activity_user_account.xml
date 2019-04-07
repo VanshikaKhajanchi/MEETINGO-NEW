@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_blue_bg"
     tools:context="com.example.MEETINGO.UserAccount">
-
 
     //profile tab
 
@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ffffff"
+        >
 
 
         <ImageView
@@ -39,6 +41,7 @@
             android:text="USERNAME"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="#191654"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +70,8 @@
             android:layout_margin="8dp"
             android:layout_gravity="center_horizontal"
             android:text="Account Settings"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:textColor="#ffffff"/>
         <TextView
             android:id="@+id/acc_strmsg"
             android:layout_marginHorizontal="18dp"
@@ -76,6 +80,7 @@
             android:layout_gravity="center_horizontal"
             android:text="Starred Messages"
             android:textSize="24dp"
+            android:textColor="#ffffff"
             android:layout_margin="8dp"/>
 
         <TextView
@@ -85,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Invite a Friend"
+            android:textColor="#ffffff"
             android:textSize="24dp"
             android:layout_margin="8dp"/>
 
@@ -94,50 +100,56 @@
 
     //buttons tab
 
-    <LinearLayout
-        android:id="@+id/acc_button"
+    <Button
+        android:id="@+id/update_status"
+        android:layout_marginHorizontal="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="166dp"
-        android:orientation="vertical">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="188dp"
+        android:text="Update Status"
+        android:textSize="32dp" />
 
-        <Button
-            android:id="@+id/acc_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_red"
-            android:text="LOGOUT"
-            android:textSize="34dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/acc_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="79dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@drawable/gradient_red"
+        android:gravity="center"
+        android:text="LOGOUT"
+        android:textSize="34dp" />
+
+
 
 
 
     //including bottomnav bar
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/bttm_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_margin="4dp"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/botom_nav_colors"
-        app:itemTextColor="@drawable/botom_nav_colors"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navigation" />
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/botom_nav_colors"
+            app:itemTextColor="@drawable/botom_nav_colors"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/navigation" />
 
     </android.support.design.widget.CoordinatorLayout>
 

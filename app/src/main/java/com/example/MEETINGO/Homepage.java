@@ -52,10 +52,6 @@ public class Homepage extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), UserAccount.class));
                 break;
 
-            case R.id.navigation_Status:
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(intent);
-                break;
 
         }
 

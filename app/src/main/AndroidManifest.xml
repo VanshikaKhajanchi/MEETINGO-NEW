@@ -17,7 +17,10 @@
         android:roundIcon="@mipmap/logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CUsers"></activity>
+        <activity android:name=".Starred_msgs"></activity>
+        <activity android:name=".Account_settings" />
+        <activity android:name=".ChattingDemo" />
+        <activity android:name=".CUsers" />
         <activity android:name=".Webinar" />
         <activity android:name=".Whiteboard" />
         <activity android:name=".UserChat" />

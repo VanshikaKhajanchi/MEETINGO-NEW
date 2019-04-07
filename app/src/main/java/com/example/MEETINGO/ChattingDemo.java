@@ -33,20 +33,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CUsers extends AppCompatActivity
+public class ChattingDemo extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
+
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
-
-
-
-
-
     private String userid;
     private String usertest;
-     TextView textview;
-
+    TextView textview;
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>();
@@ -54,38 +49,30 @@ public class CUsers extends AppCompatActivity
     int totalUsers = 0;
     ProgressDialog pd;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cusers);
+        setContentView(R.layout.activity_chatting_demo);
 
-        usersList = (ListView)findViewById(R.id.usersList);
-        noUsersText = (TextView)findViewById(R.id.noUsersText);
-        textview=findViewById(R.id.textView3);
+        usersList = findViewById(R.id.demousersList);
+        noUsersText =findViewById(R.id.demonoUsersText);
+
 
         //getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
         userid=firebaseAuth.getCurrentUser().getUid();
 
         ///firebase reference
-        DatabaseReference database=FirebaseDatabase.getInstance().getReference();
+        DatabaseReference database= FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref=database.child("users").child(userid);
 
-        pd = new ProgressDialog(CUsers.this);
+        pd = new ProgressDialog(ChattingDemo.this);
         pd.setMessage("Loading...");
         pd.show();
 
-        //including bottomnav bar
-        BottomNavigationView navigation =findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
-
-
         String url = "https://vanshika-ea13a.firebaseio.com/users.json";
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
+        StringRequest request = new StringRequest
+                (Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
                 doOnSuccess(s);
@@ -97,7 +84,7 @@ public class CUsers extends AppCompatActivity
             }
         });
 
-        RequestQueue rQueue = Volley.newRequestQueue(CUsers.this);
+        RequestQueue rQueue = Volley.newRequestQueue(ChattingDemo.this);
         rQueue.add(request);
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,10 +92,17 @@ public class CUsers extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 User.chatWith = al.get(position);
-                startActivity(new Intent(CUsers.this, UserChat.class));
-             }
+                startActivity(new Intent(ChattingDemo.this, UserChat.class));
+            }
         });
+
+
+        //including bottomnav bar
+        BottomNavigationView navigation =findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
     }
+
+        //methods
 
     public void doOnSuccess(String s){
         try {
@@ -120,34 +114,42 @@ public class CUsers extends AppCompatActivity
             String userrrr =usertest;
 
             while(i.hasNext()){
-                key = i.next().toString();
+               key = i.next().toString();
+
+
                 if(!key.equals(User.username))
                 {
+
                     al.add(key);
+
 
                     FirebaseDatabase.getInstance().getReference().child("users").child(key)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     // Get user information
-                                   /* try {*/
-                                        User user = dataSnapshot.getValue(User.class);
-                                        String name = user.Name;
-                                        al.add(name);
-                                       /* Iterator itr=al1.iterator();*/
-                                       /* while(itr.hasNext()){
-                                        }*/
-                                        textview.setText(name);
-                                    /*}*/
-                                    /*catch (Exception e) {
-                                        Toast.makeText(CUsers.this, "Detials not Available", Toast.LENGTH_LONG).show();
+                                    User user = dataSnapshot.getValue(User.class);
 
-                                    }*/
+                                    try {
+                                        String name = user.Name;
+                                        al1.add(name);
+                                        /*textview.setText(name);*/
+                                        /*usertest=user.Name;*/
+
+
+
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Toast.makeText(ChattingDemo.this, "Detials not Available", Toast.LENGTH_LONG).show();
+
+                                    }
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                    Toast.makeText(CUsers.this, "oncancelled ran", Toast.LENGTH_LONG).show();
+
+
                                 }
                             });
 
@@ -167,14 +169,15 @@ public class CUsers extends AppCompatActivity
         else{
             noUsersText.setVisibility(View.GONE);
             usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter
-                    (new ArrayAdapter<String>
-                            (this, android.R.layout.simple_list_item_1, al));
-
+            usersList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al));
         }
 
         pd.dismiss();
     }
+
+
+
+
 
     //bottom Navigation method
     @Override
@@ -194,7 +197,6 @@ public class CUsers extends AppCompatActivity
                 startActivity(new Intent(getApplicationContext(), UserAccount.class));
                 break;
 
-
         }
 
         return false;
@@ -202,5 +204,5 @@ public class CUsers extends AppCompatActivity
     }
 
 
-
 }
+

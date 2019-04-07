@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="" />
+        android:title="Home" />
     <item
         android:id="@+id/navigation_webinar"
         android:icon="@drawable/ic_create_black_24dp"
-        android:title="" />
+        android:title="WhiteBoard" />
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/ic_account_logo"
-        android:title="" />
-    <item
-        android:id="@+id/navigation_Status"
-        android:icon="@drawable/ic_photo_camera_black_24dp"
-        android:title="" />
+        android:title="Account" />
+
 </menu>
