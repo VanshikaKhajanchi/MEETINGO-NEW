@@ -6,9 +6,9 @@ public class User {
     public String Phone;
     public String Userid;
 
-    static String username = "";
+    static String username = "yashasvi";
     static String password = "";
-    static String chatWith = "";
+    static String chatWith = "vanshika";
 
    public User(){//default constructor
          }

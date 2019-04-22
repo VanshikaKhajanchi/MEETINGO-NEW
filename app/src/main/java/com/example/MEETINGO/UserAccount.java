@@ -78,6 +78,23 @@ public class UserAccount extends AppCompatActivity
             }
         });
 
+        starred_msgs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(UserAccount.this, "Sorry not available at the moment", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(UserAccount.this, "Sorry not available at the moment", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
         userid=firebaseAuth.getCurrentUser().getUid();
 
         FirebaseDatabase.getInstance().getReference().child("users").child(userid)

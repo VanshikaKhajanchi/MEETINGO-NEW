@@ -1,31 +1,17 @@
 package com.example.MEETINGO;
 
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,28 +19,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+import android.support.v7.app.AppCompatActivity;
+
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 public class CUsers extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
-
-    //firebase auth object
-    private FirebaseAuth firebaseAuth;
-
-
-
-
-
-    private String userid;
-    private String usertest;
-     TextView textview;
-
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>();
-    ArrayList<String> al1 = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
 
-
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,29 +51,15 @@ public class CUsers extends AppCompatActivity
 
         usersList = (ListView)findViewById(R.id.usersList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
-        textview=findViewById(R.id.textView3);
-
-        //getting firebase auth object
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-        userid=firebaseAuth.getCurrentUser().getUid();
-
-        ///firebase reference
-        DatabaseReference database=FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref=database.child("users").child(userid);
 
         pd = new ProgressDialog(CUsers.this);
         pd.setMessage("Loading...");
         pd.show();
 
-        //including bottomnav bar
-        BottomNavigationView navigation =findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference ref =  mDatabase.child("userchat");
+        String url = "https://vanshika-ea13a.firebaseio.com/userchat.json";
 
-
-        String url = "https://vanshika-ea13a.firebaseio.com/users.json";
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
@@ -102,12 +77,14 @@ public class CUsers extends AppCompatActivity
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User.chatWith = al.get(position);
                 startActivity(new Intent(CUsers.this, UserChat.class));
-             }
+            }
         });
+
+        BottomNavigationView navigation =findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
     }
 
     public void doOnSuccess(String s){
@@ -117,40 +94,11 @@ public class CUsers extends AppCompatActivity
             Iterator i = obj.keys();
             String key = "";
 
-            String userrrr =usertest;
-
             while(i.hasNext()){
                 key = i.next().toString();
-                if(!key.equals(User.username))
-                {
+
+                if(!key.equals(User.username)) {
                     al.add(key);
-
-                    FirebaseDatabase.getInstance().getReference().child("users").child(key)
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    // Get user information
-                                   /* try {*/
-                                        User user = dataSnapshot.getValue(User.class);
-                                        String name = user.Name;
-                                        al.add(name);
-                                       /* Iterator itr=al1.iterator();*/
-                                       /* while(itr.hasNext()){
-                                        }*/
-                                        textview.setText(name);
-                                    /*}*/
-                                    /*catch (Exception e) {
-                                        Toast.makeText(CUsers.this, "Detials not Available", Toast.LENGTH_LONG).show();
-
-                                    }*/
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    Toast.makeText(CUsers.this, "oncancelled ran", Toast.LENGTH_LONG).show();
-                                }
-                            });
-
                 }
 
                 totalUsers++;
@@ -161,22 +109,20 @@ public class CUsers extends AppCompatActivity
         }
 
         if(totalUsers <=1){
+           /* noUsersText.setText("no users detected");*/
             noUsersText.setVisibility(View.VISIBLE);
             usersList.setVisibility(View.GONE);
         }
         else{
             noUsersText.setVisibility(View.GONE);
             usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter
-                    (new ArrayAdapter<String>
-                            (this, android.R.layout.simple_list_item_1, al));
-
+            usersList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al));
         }
 
         pd.dismiss();
     }
 
-    //bottom Navigation method
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -200,7 +146,4 @@ public class CUsers extends AppCompatActivity
         return false;
 
     }
-
-
-
 }

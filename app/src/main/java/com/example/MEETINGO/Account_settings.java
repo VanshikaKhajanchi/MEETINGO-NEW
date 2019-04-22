@@ -34,7 +34,7 @@ import java.io.IOException;
 
 public class Account_settings extends AppCompatActivity {
 
-    Button update_profile_pic;
+    Button update_profile_pic,update_details,delete_acct;
     private FirebaseAuth firebaseAuth;
     private static final int READ_REQUEST_CODE = 42;
 
@@ -65,6 +65,20 @@ public class Account_settings extends AppCompatActivity {
         imageView=findViewById(R.id.profile_image);
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference(DATABASE_PATH_UPLOADS);
+
+        update_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Account_settings.this, "Sorry not available at the moment", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        delete_acct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Account_settings.this, "Sorry not ava ilable at the moment", Toast.LENGTH_LONG).show();
+            }
+        });
 
         update_profile_pic = findViewById(R.id.update_profilr_pic);
         update_profile_pic.setOnClickListener(new View.OnClickListener() {
